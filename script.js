@@ -34,6 +34,24 @@ function getResult() {
     });
 }
 
+function resetSelection(ans) {
+    ans.classList.remove('selected');
+    ans.classList.remove('unselected');
+    ans.classList.add('emptySelection');
+}
+
+function unselect(ans) {
+    ans.classList.remove('emptySelection');
+    ans.classList.remove('selected');
+    ans.classList.add('unselected');
+}
+
+function select(ans) {
+    ans.classList.remove('emptySelection');
+    ans.classList.remove('unselected');
+    ans.classList.add('selected');
+}
+
 function onClick(event) {
     const clicked = event.currentTarget;
     const queryOldAns = 'div[data-question-id="' + clicked.dataset.questionId +
@@ -47,8 +65,7 @@ function onClick(event) {
     // diseleziono la risposta selezionata
     if (selected.get(clicked.dataset.questionId) == clicked.dataset.choiceId) {
         for (let entry of entries) {
-            entry.style.opacity = 1;
-            entry.style.backgroundColor = '#f4f4f4';
+            resetSelection(entry);
         }
 
         const image = document.querySelector(queryNewAns + ' .checkbox');
@@ -62,21 +79,18 @@ function onClick(event) {
     // se esiste, deseleziona la vecchia risposta, altrimenti 
     // deseleziona tutto tranne la risposta corrente
     if (unClicked) {
-        unClicked.style.opacity = 0.6;
-        unClicked.style.backgroundColor = '#f4f4f4';
+        unselect(unClicked);
         document.querySelector(queryOldAns + ' .checkbox').src = unCheckedImg;
     } else {
         for (let entry of entries) {
             if (entry.dataset.choiceId != clicked.dataset.choiceId) {
-                entry.style.opacity = 0.6;
-                entry.style.backgroundColor = '#f4f4f4';
+                unselect(entry);
             }
         }
     }
 
     // seleziona l'elemento cliccato
-    clicked.style.backgroundColor = '#cfe3ff';
-    clicked.style.opacity = 1;
+    select(clicked);
     const image = document.querySelector(queryNewAns + ' .checkbox');
     image.src = checkedImg;
     selected.set(clicked.dataset.questionId, clicked.dataset.choiceId);
