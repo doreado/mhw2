@@ -45,7 +45,9 @@
   justify-content: center;
 } 
 
-/* #result div p { margin: auto;} */
+#result div:hover {
+  background-color: #e0e0e0;
+}
 
 @media(max-width: 700px) {
   html {

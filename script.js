@@ -29,12 +29,6 @@ function getResult() {
     const restartButton = document.querySelector('#result div');
     restartButton.style.display = 'flex';
 
-    restartButton.addEventListener('mouseover', event => {
-        event.currentTarget.style.backgroundColor = '#e0e0e0';
-    });
-    restartButton.addEventListener('mouseout', event => {
-        event.currentTarget.style.backgroundColor = '#cecece';
-    });
     restartButton.addEventListener('click', _ => {
         window.location.reload(true)
     });
