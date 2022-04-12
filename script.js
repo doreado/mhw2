@@ -3,15 +3,8 @@ const checkedImg = './images/checked.png';
 const unCheckedImg = './images/unchecked.png';
 
 function getResultMap() {
-    if (selected.get('one') == selected.get('two') 
-        || selected.get('one') == selected.get('three')) {
-        result = selected.get('one');
-    } else if (selected.get('two') == selected.get('three')) {
-        result = selected.get('two');
-    } else {
-        result = selected.get('one');
-    }
-    
+    result = selected.get('two') == selected.get('three') ?
+        selected.get('two') : selected.get('one');
     return RESULTS_MAP[result];
 }
 
@@ -25,7 +18,7 @@ function getResult() {
     h1.textContent = resultMap['title'];
     const p = document.querySelector('#result p');
     p.textContent = resultMap['contents'];
- 
+
     const restartButton = document.querySelector('#result div');
     restartButton.style.display = 'flex';
 
